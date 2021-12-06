@@ -15,42 +15,47 @@ const Expanses = ({ items }) => {
     return exp.date.getFullYear().toString() === filtreddate;
   });
 
+
+  let resultcontent=  <p className="text-red-400 text-center text-2xl font-mono ">Not Found Try again</p>;
+
+  // let resultcontentt= null;
+
+
+  if(filtreddate==="all") {
+
+    resultcontent = items.map((item) => {
+
+     return   <ExpanseItem
+          key={item.id}
+          title={item.title}
+          datex={item.date}
+          amount={item.amount} />
+    
+       
+  }
+    )
+} else if (datafiltred.length !==0) {
+  resultcontent= datafiltred.map((item) => {
+    return  <ExpanseItem
+         key={item.id}
+         title={item.title}
+         datex={item.date}
+         amount={item.amount}
+       />
+
+}
+  )
+}
+
+
+
+
   return (
     <div>
       <YearsFilter onCopied={copiedFilter} /> {}
       <Wrapper>
-        {filtreddate !=="all" ? (
-          <p className="text-red-400 text-center text-2xl font-mono ">
-          </p>
-        ) : (
-          items.map((item) => {
-            return (
-              <ExpanseItem
-                key={item.id}
-                title={item.title}
-                datex={item.date}
-                amount={item.amount}
-              />
-            );
-          })
-        )}
+        {resultcontent}
         <ExpanseData>
-          {datafiltred.length === 0 && filtreddate!=='all' ? (
-            <p className="text-red-400 text-center text-2xl font-mono ">
-              Not Found Try again
-            </p>
-          ) : (
-            datafiltred.map((item) => {
-              return (
-                <ExpanseItem
-                  key={item.id}
-                  title={item.title}
-                  datex={item.date}
-                  amount={item.amount}
-                />
-              );
-            })
-          )}
         </ExpanseData>
       </Wrapper>
     </div>
